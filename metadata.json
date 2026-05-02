@@ -1,0 +1,10 @@
+{
+  "name": "Reverencia Majestad · Luxury Hair & Spa",
+  "description": "Plataforma premium de bienestar integral, peluquería de lujo y servicios SPA mobile en hoteles y domicilios de Santiago de Chile.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ],
+  "majorCapabilities": []
+}

@@ -1,0 +1,104 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "User profile data including role and personal info",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "stylist", "client"] },
+        "phone": { "type": "string" },
+        "address": { "type": "string" },
+        "hairType": { "type": "string" },
+        "notes": { "type": "string" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "Service": {
+      "title": "Service",
+      "description": "A salon service offered by the business",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "duration": { "type": "number" },
+        "priceBase": { "type": "number" },
+        "category": { "type": "string" },
+        "image": { "type": "string" },
+        "isHomeServiceAllowed": { "type": "boolean" }
+      },
+      "required": ["name", "duration", "priceBase"]
+    },
+    "Booking": {
+      "title": "Booking",
+      "description": "A scheduled appointment for a service",
+      "type": "object",
+      "properties": {
+        "clientId": { "type": "string" },
+        "stylistId": { "type": "string" },
+        "serviceId": { "type": "string" },
+        "date": { "type": "string" },
+        "time": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "confirmed", "in-progress", "completed", "cancelled"] },
+        "type": { "type": "string", "enum": ["studio", "home"] },
+        "address": { "type": "string" },
+        "totalAmount": { "type": "number" },
+        "notes": { "type": "string" }
+      },
+      "required": ["clientId", "serviceId", "date", "time", "status"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "A product available for sale in the shop",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "price": { "type": "number" },
+        "stock": { "type": "number" },
+        "category": { "type": "string" },
+        "image": { "type": "string" },
+        "status": { "type": "string", "enum": ["active", "inactive"] }
+      },
+      "required": ["name", "price", "stock"]
+    },
+    "Hotel": {
+      "title": "Hotel",
+      "description": "Partner hotel for B2B services",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "address": { "type": "string" },
+        "contactEmail": { "type": "string", "format": "email" },
+        "commissionRate": { "type": "number" },
+        "status": { "type": "string", "enum": ["active", "inactive"] }
+      },
+      "required": ["name", "contactEmail"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profile documents"
+    },
+    "/services/{serviceId}": {
+      "schema": "Service",
+      "description": "Salon services catalog"
+    },
+    "/bookings/{bookingId}": {
+      "schema": "Booking",
+      "description": "Appointment bookings"
+    },
+    "/products/{productId}": {
+      "schema": "Product",
+      "description": "Shop products catalog"
+    },
+    "/hotels/{hotelId}": {
+      "schema": "Hotel",
+      "description": "Partner hotels"
+    }
+  }
+}
